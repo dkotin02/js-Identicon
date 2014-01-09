@@ -33,7 +33,7 @@
                         <div id="identicon5-test"></div>
                     </div>
                     <div>
-                    <h2>My own simple solution</h2>
+                        <h2>My solution(v0.9)</h2>
                         <div id="dk-identicon"></div>
                     </div>
                 </div>
@@ -44,6 +44,34 @@
                 <p>The concept of Identicons was developed by Don Park in 2007. Some more references can be found on the <a href="http://en.wikipedia.org/wiki/Identicon">wiki page</a></p>
                 <p>I had a hard time finding implemenation details (in English, not code) around so I figured I'd attempt to write my own. I am <strong>not</strong> an authority
                     on the subject so by all means, draw attention to my errors. The information below is my from my attempt to understand the source codes from various implementations.<br></p>
+                <br>
+                <div>
+                    <h2>My attempt</h2>
+                    My solution is based on a few steps:
+                    <ul>
+                        <li>Generate an MD5 hash of the user's input</li>
+                        <li>Parse out the last 24 bits for color information
+                            <ul>
+                                <li>Red = Bottom 8 bits</li>
+                                <li>Green = Next 8 bits</li>
+                                <li>Blue = Next 8 bits</li>
+                            </ul></li>
+                        <li>Next, take the remaining bits and using the below algorithm, fill out a canvas/image
+                            <ul>
+                                <li>Define: <ul>
+                                        <li>the dimensions of your target canvas</li>
+                                        <li>desired border size</li>
+                                        <li>The size of each step you will take when traversing the grid</li>
+                                    </ul></li>
+
+                                <li>For each remaining bit in the hash, check to see whether it is a 1 or 0</li>
+                                <li>Starting from the top left, show a square in that positon if the bit is 1. (Choose dimensions that fit into the grid with plenty of room)</li>
+                                <li>Tranverse down the target grid until you hit a border</li>
+                                <li>When a border is hit, loop back to the top and move to the right by your default step size </li>
+                            </ul></li>
+
+                    </ul>
+                </div>
             </div>
             <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
