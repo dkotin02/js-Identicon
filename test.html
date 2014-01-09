@@ -2,24 +2,44 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>[Playgound] Identicon</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/jumbotron-narrow.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
-        <h2>Identicons!</h2>
-        <div>
-            <h2>Don Park's OG implementation in javascript</h2>
-            <canvas title="identicon -2044886870" width="48" height="48"></canvas>
+        <div class="container">
+            <div class="row">
+                <h1>Identicons!</h1>
+                <span class="h3">Enter the text you want and click the "Identiconify!" button</span>
+                <div class="input-group">
+                    <input type="text" id="user-input" class="form-control" placeholder="Enter your text here!">
+                    <span class="input-group-btn">
+                        <button id="make-identicon" class="btn btn-default btn-info">Identiconify!</button>
+                    </span>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h2>The MD5 hash of your input is: <span class="green-text" id="input-hash"></span>. <a href="https://github.com/gabrieleromanato/jQuery-MD5">[Source]</a></h2>
+                </div>
+                <h2>Don Park's original implementation in <a href="https://github.com/donpark/identicon/">javascript</a></h2>
+                <canvas title="donpark -2044886870" width="48" height="48"></canvas>
+            </div>
+            <div>
+                <h2>Using the <a href="http://francisshanahan.com/index.php/identicon5">Identicon5 jQuery plugin</a>(richer result)</h2>
+                    <div id="identicon5-test"></div>
+            </div>
+            <div>
+            <h2>Explanation</h2>
+            </div>
+            <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="js/identicon_canvas.js"></script>
+            <script type="text/javascript" src="js/jquery.identicon5.js"></script>
+            <script type="text/javascript" src="js/jquery.md5.min.js"></script>
+            <script type="text/javascript" src="js/Script.js"></script>
         </div>
-        <div>
-            <h2>Using the Identicon5 jQuery plugin (richer result)</h2>
-            <ul>
-                <li>071e3f61671e790fc492b583a01ae22b</li>
-            </ul>
-        </div>
-         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script type="text/javascript" src="js/identicon_canvas.js"></script>
-        <script type="text/javascript" src="js/jquery.identicon5.js"></script>
-        <script type="text/javascript" src="js/Script.js"></script>
-    </body>
     </body>
 </html>
