@@ -1,3 +1,22 @@
-.green-text{
+.green-text {
     color: #47d11c;
+}
+
+#solutions {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 1s ease-in;
+    -moz-transition: opacity 1s ease-in;
+    -ms-transition: opacity 1s ease-in;
+    -o-transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
+}
+
+#solutions.fade-in {
+    visibility: visible;
+    opacity: 1;
+}
+
+#demo{
+    text-align: left !important;
 }

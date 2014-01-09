@@ -10,29 +10,40 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <h1>Identicons!</h1>
-                <span class="h3">Enter the text you want and click the "Identiconify!" button</span>
-                <div class="input-group">
-                    <input type="text" id="user-input" class="form-control" placeholder="Enter your text here!">
-                    <span class="input-group-btn">
-                        <button id="make-identicon" class="btn btn-default btn-info">Identiconify!</button>
-                    </span>
-                </div>
-            </div>
-            <div>
+            <h1>Identicons!</h1>
+            <div id="demo" class="well">
                 <div>
-                    <h2>The MD5 hash of your input is: <span class="green-text" id="input-hash"></span>. <a href="https://github.com/gabrieleromanato/jQuery-MD5">[Source]</a></h2>
+                    <span class="h3">Enter any text below and click "Identiconify!" or press Enter</span>
+                    <p></p>
+                    <div class="input-group">
+                        <input type="text" id="user-input" class="form-control" placeholder="Enter your text here!">
+                        <span class="input-group-btn">
+                            <button id="make-identicon" class="btn btn-default btn-info">Identiconify!</button>
+                        </span>
+                    </div>
                 </div>
-                <h2>Don Park's original implementation in <a href="https://github.com/donpark/identicon/">javascript</a></h2>
-                <canvas title="donpark -2044886870" width="48" height="48"></canvas>
+                <div id="solutions">
+                    <div>
+                        <h2>The MD5 hash of your input is: <span class="green-text" id="input-hash"></span>. <a href="https://github.com/gabrieleromanato/jQuery-MD5">[Source]</a></h2>
+                        <h2>Don Park's original implementation in <a href="https://github.com/donpark/identicon/">javascript</a></h2>
+                        <canvas title="donpark -2044886870" width="48" height="48"></canvas>
+                    </div>
+                    <div>
+                        <h2>Using the <a href="http://francisshanahan.com/index.php/identicon5">Identicon5 jQuery plugin</a>(richer result)</h2>
+                        <div id="identicon5-test"></div>
+                    </div>
+                    <div>
+                    <h2>My own simple solution</h2>
+                        <div id="dk-identicon"></div>
+                    </div>
+                </div>
             </div>
             <div>
-                <h2>Using the <a href="http://francisshanahan.com/index.php/identicon5">Identicon5 jQuery plugin</a>(richer result)</h2>
-                    <div id="identicon5-test"></div>
-            </div>
-            <div>
-            <h2>Explanation</h2>
+                <hr>
+                <h2>Explanation</h2>
+                <p>The concept of Identicons was developed by Don Park in 2007. Some more references can be found on the <a href="http://en.wikipedia.org/wiki/Identicon">wiki page</a></p>
+                <p>I had a hard time finding implemenation details (in English, not code) around so I figured I'd attempt to write my own. I am <strong>not</strong> an authority
+                    on the subject so by all means, draw attention to my errors. The information below is my from my attempt to understand the source codes from various implementations.<br></p>
             </div>
             <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
             <script src="js/bootstrap.min.js"></script>

@@ -14,11 +14,27 @@ $(document).ready(function () {
 
 $('#make-identicon').click(function () {
     //On click, generate hash and populate field
-    var input = $('#user-input').text();
+    var input = $('#user-input').val();
     //ideally, do some basic input checking here to catch empty input, etc.
     var md5hash = $.md5(input);
     $("#input-hash").text(md5hash);
     $('#identicon5-test').text(md5hash);
     //Perform Identicon5 tasks
     $('#identicon5-test').identicon5({ size: 50 });
+    //show content:
+    $('#solutions').addClass("fade-in");
+
+});
+
+
+function make_identicon(target,hash){
+    var grid_size = 50; //define the grid size
+
+}
+
+///bind enter keypress
+$(document).keypress(function (e) {
+    if (e.which == 13) { //enter key
+        $("#make-identicon").trigger("click"); //catch the enter keypress for us
+    }
 });
