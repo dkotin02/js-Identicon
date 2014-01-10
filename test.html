@@ -26,14 +26,14 @@
                     <div>
                         <h2>The MD5 hash of your input is: <span class="green-text" id="input-hash"></span>. <a href="https://github.com/gabrieleromanato/jQuery-MD5">[Source]</a></h2>
                         <h2>Don Park's original implementation in <a href="https://github.com/donpark/identicon/">javascript</a></h2>
-                        <canvas title="donpark -2044886870" width="48" height="48"></canvas>
+                        <canvas id="donpark-canvas" title="donpark" width="48" height="48"></canvas>
                     </div>
                     <div>
                         <h2>Using the <a href="http://francisshanahan.com/index.php/identicon5">Identicon5 jQuery plugin</a>(richer result)</h2>
                         <div id="identicon5-test"></div>
                     </div>
                     <div>
-                        <h2>My solution(v0.9)</h2>
+                        <h2><a href="https://github.com/dkotin02/js-Identicon">My solution(v0.1)</a></h2>
                         <div id="dk-identicon"></div>
                     </div>
                 </div>
@@ -49,23 +49,25 @@
                     <h2>My attempt</h2>
                     My solution is based on a few steps:
                     <ul>
-                        <li>Generate an MD5 hash of the user's input</li>
-                        <li>Parse out the last 24 bits for color information
+                        <li>Generate an MD5 hash of the user's input (128 bit)</li>
+                        <li>Parse out the last 24 bits for color information (or any you want, really)
                             <ul>
                                 <li>Red = Bottom 8 bits</li>
                                 <li>Green = Next 8 bits</li>
                                 <li>Blue = Next 8 bits</li>
                             </ul></li>
-                        <li>Next, take the remaining bits and using the below algorithm, fill out a canvas/image
+                        <li>Truncate the 128-bit hash to a 32-bit value: Chosen for simplicity. There are a lot of ways to get 32 bits out of 128 (Well, 1477806921502280666682474774300 to be exact)</li>
+                        <li>Take the remaining bits and using the below method, fill out a canvas/image
                             <ul>
                                 <li>Define: <ul>
                                         <li>the dimensions of your target canvas</li>
-                                        <li>desired border size</li>
-                                        <li>The size of each step you will take when traversing the grid</li>
+                                        <li>desired border size (unused in my implementation)</li>
+                                        <li>the size of each step you will take when traversing the grid(typically the size of the square which fits whatever item you are inserting fully)</li>
                                     </ul></li>
 
                                 <li>For each remaining bit in the hash, check to see whether it is a 1 or 0</li>
-                                <li>Starting from the top left, show a square in that positon if the bit is 1. (Choose dimensions that fit into the grid with plenty of room)</li>
+                                <li>Starting from the top left, show a square in that positon if the bit is 1</li>
+                                <li>You can mirror this image on the right hand side in this step as well</li>
                                 <li>Tranverse down the target grid until you hit a border</li>
                                 <li>When a border is hit, loop back to the top and move to the right by your default step size </li>
                             </ul></li>
