@@ -20,7 +20,7 @@ $('#make-identicon').click(function () {
     $("#input-hash").text(md5hash);
     $('#identicon5-test').text(md5hash);
     //Use Don Park's solution. This is a hacky solution because I don't want to change his code
-    var truncatedhashint = parseInt(md5hash.substring(0, 8),16);
+    var truncatedhashint = parseInt(md5hash.substring(0, 8), 16);
     $('#donpark-canvas').attr("title", "donpark " + truncatedhashint);
     render_identicon_canvases('donpark');
     //Perform Identicon5 tasks
@@ -29,6 +29,13 @@ $('#make-identicon').click(function () {
     make_identicon($("#dk-identicon"), md5hash);
     //show content:
     $('#solutions').addClass("fade-in");
+    //Server-side coolness
+    $.get(
+        "/php/server.php/?hash=hi",
+        function (data) {
+            console.log("Server says: ", data);
+        }
+    );
 
 });
 
@@ -39,7 +46,6 @@ function make_identicon(target, hash) {
     var border_size = 15; //unsued
     var square_size = 20; //the size of the squares that will be painted
     var step_size = square_size; //Reduce as necessary
-
 
     if (hash.length < 25) {
         //Not enough information (there are ways around this though), break
