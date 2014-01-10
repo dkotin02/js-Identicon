@@ -9,7 +9,8 @@ Will eventually make into a jQuery plugin for the curious minds and add more com
 
 Why client-side vs having a server process it? 
 
-Well, why not? HTML5 + Javascript gives us a lot of leeway to perform such tasks browser-side instead of serving up the whole page or creating an image on the server to be rendered later.
+1. Well, why not? HTML5 + Javascript gives us a lot of leeway to perform such tasks browser-side ^_^.
+2. The real reason is because I had a time crunch and discovered a number of langauge restrictions with my current host. Version 0.2 will show both the current client-based solution and the server-based solution (Probably PHP or Ruby since I've never worked in either but want to learn)
 
 
 
