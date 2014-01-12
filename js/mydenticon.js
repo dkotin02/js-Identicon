@@ -39,7 +39,7 @@ function server_make_identicon(hash) {
     var color = hash.substring(hash.length - 6); //color information as hex
     //Send request to server for processing
     $.getJSON(
-        "/php/server.php?method=identicon&hash=" + hash.substring(0, 8),
+        "php/server.php?method=identicon&hash=" + hash.substring(0, 8),
         function (data) {
           //  console.log("Server says: ", data);
             render_idenicon(data, $('#dk-identicon-server'), color); //render function on canvas
@@ -65,7 +65,6 @@ function render_idenicon(data, target, color) {
         for (var j = 0; j < response.grid[i].length; j++) {
             //Fill the canvas with the defined parameters if 1
             if (response.grid[i][j] == 1) {
-                console.log("hehe");
                 context.fillRect(i * square_size, j * square_size, square_size, square_size);
                 //cretae mirror
                 context.fillRect((grid_size - i - 1) * square_size, j * square_size, square_size, square_size);
