@@ -71,7 +71,7 @@ function render_idenicon(data, target, color) {
             }
         }
     }
-    //All done! Show on screen. Result SHOULD match the client-side solution
+    //All done! Show on screen. Result MUST match the client-side solution
     //write the result back to document
     target.html($(canvas));
 }
