@@ -36,7 +36,7 @@ $('#make-identicon').click(function () {
 
 
 function server_make_identicon(hash) {
-    var color = '#' + hash.substring(hash.length - 6); //color information as hex
+    var color = hash.substring(hash.length - 6); //color information as hex
     //Send request to server for processing
     $.getJSON(
         "/php/server.php?method=identicon&hash=" + hash.substring(0, 8),
@@ -54,18 +54,18 @@ function render_idenicon(data, target, color) {
     var border_size = 15; //unsued
     var square_size = 20; //the size of the squares that will be painted
     var response = data//$.parseJSON(data); //{ grid: [[][]] } 2D array
-    console.log(color);
     //create canvas
     var canvas = document.createElement("canvas");
     canvas.setAttribute("width", grid_size * square_size);
     canvas.setAttribute("height", grid_size * square_size);
     var context = canvas.getContext("2d");
     context.fillStyle = "#" + color;
-
+    //console.log(response.grid)
     for (var i = 0; i < response.grid.length; i++) {
-        for (var j = 0; i < response.grid[i][j].length; i++) {
+        for (var j = 0; j < response.grid[i].length; j++) {
             //Fill the canvas with the defined parameters if 1
             if (response.grid[i][j] == 1) {
+                console.log("hehe");
                 context.fillRect(i * square_size, j * square_size, square_size, square_size);
                 //cretae mirror
                 context.fillRect((grid_size - i - 1) * square_size, j * square_size, square_size, square_size);
@@ -98,19 +98,21 @@ function make_identicon(target, hash) {
     var context = canvas.getContext("2d");
     context.fillStyle = "#" + color;
     // context.fillStyle = "#" + (parseInt("FFFFFF", 16) - parseInt(color, 16)).toString(16); //Inverted color if you please
-
     var posx = 0;
     var posy = 0;
     var x = 0;
     var y = 0;
     var truncatedhash = hash.toString().substring(0, 8); //truncate and take first 8 characters => each hex character = 4 bits so total is 32 bits
     var binaryhash = parseInt(truncatedhash, 16).toString(2);
+    var inthash = parseInt(truncatedhash, 16);
+    //console.log(inthash);
+    //console.log(parseInt(truncatedhash, 16) >> 1);
     // context.fillRect(posx, posy, square_size, square_size);
     //Loop through the hash and assign a value
     var max_steps = (grid_size % 2 == 0) ? ((grid_size * grid_size) / 2) : ((grid_size * (grid_size + 1)) / 2); //unused
-
     for (var i = 0; i < max_steps; i++) {
-        if (binaryhash.substring(binaryhash.length - 1) == "1") {
+        //if (binaryhash.substring(binaryhash.length - 1) == "1") {
+            if((inthash & 1) == 1) {
             //turn pixel on!
             posx = x * (square_size);
             posy = y * (square_size);
@@ -121,6 +123,7 @@ function make_identicon(target, hash) {
         }
         // console.log(binaryhash); 
         binaryhash = binaryhash.substring(0, binaryhash.length - 1); //move to the next bit
+        inthash >>= 1;
 
         y += 1; //move down by one unit
         if (y == grid_size) {
