@@ -7,6 +7,8 @@ Will eventually make into a jQuery plugin for the curious minds and add more com
 
 /js/mydenticon.js contains my implementation and calls to the other scripts used
 
+
+
 v0.9
 ======
 Added PHP version of my solution as a simple REST api. Server decides what the identicon should look like (minimally), 
