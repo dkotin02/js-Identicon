@@ -86,7 +86,8 @@ function make_identicon(target, hash) {
     var step_size = square_size; //Reduce as necessary
 
     if (hash.length < 11) {
-        //Not enough information (there are ways around this though), break
+        //Not enough information
+        //Won't be hit in this version, but necessary for plugin since user will provide their own hash
         return;
     }
 
@@ -103,17 +104,14 @@ function make_identicon(target, hash) {
     var x = 0;
     var y = 0;
     var truncatedhash = hash.toString().substring(0, 8); //truncate and take first 8 characters => each hex character = 4 bits so total is 32 bits
-    var binaryhash = parseInt(truncatedhash, 16).toString(2);
+   // var binaryhash = parseInt(truncatedhash, 16).toString(2); //unused. Fixed bug with bitshifting of integer
     var inthash = parseInt(truncatedhash, 16);
-    //console.log(inthash);
-    //console.log(parseInt(truncatedhash, 16) >> 1);
-    // context.fillRect(posx, posy, square_size, square_size);
+
     //Loop through the hash and assign a value
     var max_steps = (grid_size % 2 == 0) ? ((grid_size * grid_size) / 2) : ((grid_size * (grid_size + 1)) / 2); //unused
     for (var i = 0; i < max_steps; i++) {
-        //if (binaryhash.substring(binaryhash.length - 1) == "1") {
             if((inthash & 1) == 1) {
-            //turn pixel on!
+            //turn square on
             posx = x * (square_size);
             posy = y * (square_size);
             context.fillRect(posx, posy, square_size, square_size);
@@ -121,9 +119,8 @@ function make_identicon(target, hash) {
             context.fillRect((grid_size - x - 1) * square_size, posy, square_size, square_size);
 
         }
-        // console.log(binaryhash); 
-        binaryhash = binaryhash.substring(0, binaryhash.length - 1); //move to the next bit
-        inthash >>= 1;
+      
+        inthash >>= 1; //shift right by 1 bit
 
         y += 1; //move down by one unit
         if (y == grid_size) {
