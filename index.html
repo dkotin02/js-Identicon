@@ -22,10 +22,12 @@
                         </span>
                     </div>
                 </div>
-                <div id="solutions">
+                <div class="row" id="solutions">
+                    <h2>The MD5 hash of your input is: <span class="green-text" id="input-hash"></span>. <a href="https://github.com/gabrieleromanato/jQuery-MD5">[Source]</a></h2>
+                    <hr>
+                    <h1>Client-side solutions:</h1>
                     <div>
-                        <h2>The MD5 hash of your input is: <span class="green-text" id="input-hash"></span>. <a href="https://github.com/gabrieleromanato/jQuery-MD5">[Source]</a></h2>
-                        <h2>Don Park's original implementation in <a href="https://github.com/donpark/identicon/">javascript</a></h2>
+                        <h2>Don Park's original implementation re-written in <a href="https://github.com/donpark/identicon/">javascript</a></h2>
                         <canvas id="donpark-canvas" title="donpark" width="48" height="48"></canvas>
                     </div>
                     <div>
@@ -33,11 +35,13 @@
                         <div id="identicon5-test"></div>
                     </div>
                     <div>
-                        <h2><a href="https://github.com/dkotin02/js-Identicon">My solution(Client-side v0.1)</a></h2>
+                        <h2><a href="https://github.com/dkotin02/js-Identicon">My solution (v0.2)</a></h2>
                         <div id="dk-identicon"></div>
                     </div>
+                    <hr>
+                    <h1>Server based solutions</h1>
                     <div>
-                        <h2><a href="https://github.com/dkotin02/js-Identicon">My solution(Server-side v0.1)</a></h2>
+                        <h2><a href="https://github.com/dkotin02/js-Identicon">My solution(v0.2, PHP)</a></h2>
                         <div id="dk-identicon-server"></div>
                     </div>
                 </div>
@@ -46,11 +50,13 @@
                 <hr>
                 <h2>Explanation</h2>
                 <p>The concept of Identicons was developed by Don Park in 2007. Some more references can be found on the <a href="http://en.wikipedia.org/wiki/Identicon">wiki page</a></p>
-                <p>I had a hard time finding implemenation details (in English, not code) around so I figured I'd attempt to write my own. I am <strong>not</strong> an authority
-                    on the subject so by all means, draw attention to my errors. The information below is my from my attempt to understand the source codes from various implementations.<br></p>
+                <p>I had a hard time finding implemenation details (in English, not code) around so I figured I'd attempt to write my own so others who don't speak code can understand. I am <strong>not</strong> an authority
+                    on the subject so by all means, draw attention to my errors.<br> There are a lot of ways to implement Identicons. I don't use shapes and multiple colors in mine but as the above images show, it produces a much richer result</p>
+
                 <br>
+                <p><strong>tl;dr version: </strong>Define grid, hash input, parse bits and use that to determine the color, shape and whether to display that block or not</p>
                 <div>
-                    <h2>My attempt</h2>
+                    <h3>Longer version</h3>
                     My solution is based on a few steps:
                     <ul>
                         <li>Generate an MD5 hash of the user's input (128 bit)</li>
@@ -61,12 +67,12 @@
                                 <li>Blue = Next 8 bits</li>
                             </ul></li>
                         <li>Truncate the 128-bit hash to a 32-bit value: Chosen for simplicity. There are a lot of ways to get 32 bits out of 128 (Well, 1477806921502280666682474774300 to be exact)</li>
-                        <li>Take the remaining bits and using the below method, fill out a canvas/image
+                        <li>Take the remaining bits and using the below method, fill out a image
                             <ul>
                                 <li>Define: <ul>
                                         <li>the dimensions of your target canvas</li>
                                         <li>desired border size (unused in my implementation)</li>
-                                        <li>the size of each step you will take when traversing the grid(typically the size of the square which fits whatever item you are inserting fully)</li>
+                                        <li>the size of each step you will take when traversing the grid(typically the size of the square which fits whatever shape you are inserting fully)</li>
                                     </ul></li>
 
                                 <li>For each remaining bit in the hash, check to see whether it is a 1 or 0</li>
@@ -75,7 +81,16 @@
                                 <li>Tranverse down the target grid until you hit a border</li>
                                 <li>When a border is hit, loop back to the top and move to the right by your default step size </li>
                             </ul></li>
-
+                        <li>Notes:
+                            <ul>
+                                <li>Both my client-side and server-side solutions use the same algorithm above</li>
+                                <li>If you want shapes (I'll add this later), use the same method above but instead of just deciding whether a bit is turned on or off, grab a group of bits you want
+                                     and use that to pick a shape from a shape array you define<br>
+                            You can define shapes by using your squares (step size) as a base and filling various parts as necessary to draw the shape (triangle, diamond, circle, etc.). <br>
+                            You can get even fancier and add rotations! Just like with the shapes, choose bits you want to give you rotation information and convert that into an angle however you want.
+                            For each square/shape, use this additional information to choose the rotation of the image (if you don't want to do math, you can hard-code the rotated images. It is a traditional space vs. computational cost problem
+                                </li>
+                            </ul></li>
                     </ul>
                 </div>
             </div>
